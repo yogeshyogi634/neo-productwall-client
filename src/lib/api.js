@@ -5,12 +5,12 @@ async function request(endpoint, options = {}) {
   const headers = {
     "Content-Type": "application/json",
     ...options.headers,
+    Cookie: "token=" + localStorage.getItem("token"),
   };
 
   const config = {
     ...options,
     headers,
-    Cookie: "token=" + localStorage.getItem("token"),
   };
 
   // Include credentials (cookies) for all requests
