@@ -140,7 +140,7 @@ export default function SignupPage() {
             title="Neokred Feed"
           >
             <img
-              src="/assets/nk-logo.svg"
+              src="/nk-logo.svg"
               alt="Neokred"
               className="h-10 w-auto object-contain"
             />

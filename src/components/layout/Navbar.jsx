@@ -76,7 +76,7 @@ export function Navbar() {
           title="Neokred Feed"
         >
           <img
-            src="/assets/nk-logo.svg"
+            src="/nk-logo.svg"
             alt="Neokred"
             className="h-6 w-auto object-contain"
           />
