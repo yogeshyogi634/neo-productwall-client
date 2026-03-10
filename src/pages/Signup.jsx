@@ -179,7 +179,7 @@ export default function SignupPage() {
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Full Name"
                     required
-                    className="w-full px-4 py-3 bg-white border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all"
+                    className="w-full px-4 py-3 bg-background-card-primary border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all"
                   />
                 </div>
 
@@ -239,7 +239,7 @@ export default function SignupPage() {
                     placeholder="Min. 6 characters"
                     required
                     minLength={6}
-                    className="w-full px-4 py-3 bg-white border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all"
+                    className="w-full px-4 py-3 bg-background-card-primary border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all"
                   />
                 </div>
 
@@ -252,7 +252,7 @@ export default function SignupPage() {
                     value={designation}
                     onChange={(e) => setDesignation(e.target.value)}
                     required
-                    className={`w-full px-4 py-3 bg-white border border-stroke-default-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all appearance-none ${
+                    className={`w-full px-4 py-3 bg-background-card-primary border border-stroke-default-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all appearance-none ${
                       designation
                         ? "text-text-default-primary"
                         : "text-text-default-secondary/50"
@@ -289,7 +289,7 @@ export default function SignupPage() {
                     required
                     autoFocus
                     maxLength={6}
-                    className="w-full px-4 py-3 bg-white border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all tracking-widest"
+                    className="w-full px-4 py-3 bg-background-card-primary border border-stroke-default-primary rounded-lg text-text-default-primary placeholder-text-default-secondary/50 focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary transition-all tracking-widest"
                   />
                   <button
                     type="button"
@@ -371,10 +371,10 @@ export default function SignupPage() {
       {/* Admin Approval Popup */}
       {showApprovalPopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-          <div className="bg-white border border-stroke-default-primary rounded-xl p-6 shadow-lg w-100">
+          <div className="bg-background-card-primary border border-stroke-default-primary rounded-xl p-6 shadow-lg w-100">
             <div className="text-center">
               {/* Success Icon */}
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-primary/10 mb-3">
                 <svg
                   className="w-6 h-6 text-brand-primary"
                   fill="none"
@@ -390,17 +390,17 @@ export default function SignupPage() {
                 </svg>
               </div>
 
-              <h3 className="text-lg font-bold text-gray-900 mb-2">
+              <h3 className="text-lg font-bold text-text-default-primary mb-2">
                 Account Created!
               </h3>
 
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-text-default-secondary text-sm mb-4">
                 Admin needs to approve your request before you can access the
                 platform.
               </p>
 
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4">
-                <p className="text-orange-800 text-xs font-medium">
+              <div className="bg-brand-primary/10 border border-brand-primary/30 rounded-lg p-3 mb-4">
+                <p className="text-brand-primary text-xs font-medium">
                   📧 We'll notify you via email once approved.
                 </p>
               </div>

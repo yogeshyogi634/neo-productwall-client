@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { StoreProvider } from './lib/store';
+import { StoreProvider, useStore } from './lib/store';
 import AuthGuard from './components/auth/AuthGuard';
-
+import { LoadingSpinner } from './components/ui/LoadingSpinner';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -12,36 +12,48 @@ import ResetPassword from './pages/ResetPassword';
 import PendingApproval from './pages/PendingApproval';
 import EmailSignatureGenerator from './pages/EmailSignatureGenerator';
 
+function AppContent() {
+  const { isLoading, isProductLoading } = useStore();
+  
+  if (isLoading || isProductLoading) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/pending-approval" element={<PendingApproval />} />
+      
+      {/* Protected Routes */}
+      <Route path="/" element={
+        <AuthGuard>
+          <Home />
+        </AuthGuard>
+      } />
+      <Route path="/admin" element={
+        <AuthGuard>
+          <Admin />
+        </AuthGuard>
+      } />
+      <Route path="/email-signature-generator" element={
+        <AuthGuard>
+          <EmailSignatureGenerator />
+        </AuthGuard>
+      } />
+      
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
 function App() {
   return (
     <Router>
       <StoreProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/pending-approval" element={<PendingApproval />} />
-          
-          {/* Protected Routes */}
-          <Route path="/" element={
-            <AuthGuard>
-              <Home />
-            </AuthGuard>
-          } />
-          <Route path="/admin" element={
-            <AuthGuard>
-              <Admin />
-            </AuthGuard>
-          } />
-          <Route path="/email-signature-generator" element={
-            <AuthGuard>
-              <EmailSignatureGenerator />
-            </AuthGuard>
-          } />
-          
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <AppContent />
       </StoreProvider>
     </Router>
   );

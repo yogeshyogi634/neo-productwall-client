@@ -20,6 +20,7 @@ export function StoreProvider({ children }) {
     const [dateRangeEnd, setDateRangeEndRaw] = useState(null);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isProductLoading, setIsProductLoading] = useState(false);
     const [authUser, setAuthUserState] = useState(null);
     const authUserSet = useRef(false);
 
@@ -58,7 +59,10 @@ export function StoreProvider({ children }) {
     }, [navigate]);
 
     // ── Load data from API when product changes ──────────────────────
-    const loadProductData = useCallback(async (productName) => {
+    const loadProductData = useCallback(async (productName, showLoading = false) => {
+        if (showLoading) {
+            setIsProductLoading(true);
+        }
         try {
             const [updatesData, feedbackData] = await Promise.all([
                 productApi.getUpdates(productName),
@@ -68,6 +72,10 @@ export function StoreProvider({ children }) {
             setFeedback((prev) => ({ ...prev, [productName]: feedbackData }));
         } catch (err) {
             console.error("Failed to load data from API:", err);
+        } finally {
+            if (showLoading) {
+                setIsProductLoading(false);
+            }
         }
     }, []);
 
@@ -111,10 +119,14 @@ export function StoreProvider({ children }) {
         (product) => {
             setActiveProductRaw(product);
             setActiveStatusFilter("All");
-            // Load data for the selected product if not already cached
-            loadProductData(product);
+            // Check if data is already cached
+            const hasUpdates = updates[product] && updates[product].length >= 0;
+            const hasFeedback = feedback[product] && feedback[product].length >= 0;
+            const needsLoading = !hasUpdates || !hasFeedback;
+            // Load data for the selected product and show loading if not cached
+            loadProductData(product, needsLoading);
         },
-        [loadProductData]
+        [loadProductData, updates, feedback]
     );
 
     const toggleTheme = useCallback(() => {
@@ -444,6 +456,7 @@ export function StoreProvider({ children }) {
                 dateRangeEnd,
                 isDarkMode,
                 isLoading,
+                isProductLoading,
                 // setters
                 setActiveProduct,
                 setActiveStatusFilter,
