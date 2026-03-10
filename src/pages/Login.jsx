@@ -81,7 +81,7 @@ export default function LoginPage() {
 
         localStorage.setItem("nk_user", JSON.stringify(response.user));
         localStorage.setItem("nk_profile", JSON.stringify(legacyProfile));
-        cookieStore.set("token", response.token);
+        localStorage.setItem("token", response.token);
         // Force reload/redirect
         window.location.href = "/";
       } else {
