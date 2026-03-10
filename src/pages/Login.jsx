@@ -5,9 +5,9 @@ import { api } from "../lib/api";
 export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [emailPrefix, setEmailPrefix] = useState("yogesh");
-  const [email, setEmail] = useState("yogesh@neokred.tech");
-  const [password, setPassword] = useState("NKtech@123");
+  const [emailPrefix, setEmailPrefix] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
