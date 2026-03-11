@@ -11,8 +11,8 @@ function getChipState(status) {
 
 // Define the status progression flow
 const STATUS_PROGRESSION = {
-  WIP: "IN_PROGRESS",
-  IN_PROGRESS: "DONE",
+  WIP: "BACKLOG",
+  BACKLOG: "DONE",
   DONE: "DONE", // End state
 };
 

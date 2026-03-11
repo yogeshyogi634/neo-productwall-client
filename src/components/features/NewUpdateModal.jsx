@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { RichTextEditor } from "../ui/RichTextEditor";
 
-const STATUS_OPTIONS = ["WIP", "IN_PROGRESS", "DONE"];
+const STATUS_OPTIONS = ["WIP", "BACKLOG", "DONE"];
 const DEPT_TYPES = [
   "Product",
   "Engineering",

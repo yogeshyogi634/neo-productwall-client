@@ -23,9 +23,9 @@ export function Navbar() {
 
   const userRole = (authUser?.role || "EMPLOYEE").toUpperCase();
 
-  // STRICT ADMIN CHECK: Only specific emails are allowed to see/access Admin Panel
-  const ADMIN_EMAILS = ["madhav@neokred.tech"];
-  const isAdmin = ADMIN_EMAILS.includes(currentUser?.email);
+  // ADMIN CHECK: Master admin (madhav) or any user with ADMIN role
+  const MASTER_ADMIN = "madhav@neokred.tech";
+  const isAdmin = currentUser?.email === MASTER_ADMIN || userRole === "ADMIN";
 
   // Can post updates if: MANAGEMENT role, ADMIN role, or admin user
   // userRole comes from the database (assigned by admin in the Admin Panel)

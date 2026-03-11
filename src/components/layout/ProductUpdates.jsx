@@ -6,7 +6,7 @@ import { useStore } from "@/lib/store";
 import { matchesDateFilter } from "@/lib/data";
 import { UpdateCard } from "../features/UpdateCard";
 
-const STATUS_TABS = ["All", "WIP", "IN_PROGRESS", "DONE"];
+const STATUS_TABS = ["All", "WIP", "BACKLOG", "DONE"];
 
 export function ProductUpdates() {
   const {
