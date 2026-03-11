@@ -1,38 +1,42 @@
+import axios from "axios";
+
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 async function request(endpoint, options = {}) {
+  const token = localStorage.getItem("token");
   const url = `${BASE_URL}${endpoint}`;
   const headers = {
     "Content-Type": "application/json",
     ...options.headers,
-    Cookie: "token=" + localStorage.getItem("token"),
+    authorization: `Bearer ${token}`,
   };
 
   const config = {
-    ...options,
+    url,
+    method: options.method || "GET",
     headers,
+    withCredentials: true, // equivalent to credentials: "include"
+    data: options.body, // axios uses 'data' instead of 'body'
   };
 
-  // Include credentials (cookies) for all requests
-  config.credentials = "include";
-
   try {
-    const response = await fetch(url, config);
+    const response = await axios(config);
 
     // Handle 204 No Content
     if (response.status === 204) {
       return null;
     }
 
-    const json = await response.json();
-
-    if (!response.ok) {
-      throw new Error(json.error || json.message || "Something went wrong");
-    }
+    const json = response.data;
 
     // Unwrap the 'data' property if it exists (standard response format)
     return json.data || json;
   } catch (error) {
+    // axios throws errors for non-2xx status codes
+    if (error.response) {
+      const json = error.response.data;
+      throw new Error(json.error || json.message || "Something went wrong");
+    }
     throw error;
   }
 }
